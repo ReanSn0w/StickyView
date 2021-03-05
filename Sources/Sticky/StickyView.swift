@@ -9,11 +9,11 @@ import SwiftUI
 
 struct StickyView<Content>: View where Content: View {
     var top: StickyOffset
-    @ViewBuilder var content: () -> Content
+    var content: () -> Content
     
     public init(
         top: StickyOffset = .none,
-        @ViewBuilder content: @escaping () -> Content
+        content: @escaping () -> Content
     ) {
         self.top = top
         self.content = content
