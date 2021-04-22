@@ -32,7 +32,7 @@ struct StickyView<Content>: View where Content: View {
             .offset(y: g.frame(in: .global).minY - top.offset <= 0 ? 0 : -g.frame(in: .global).minY + top.offset)
             .frame(
                 width: g.size.width,
-                height: g.size.height,
+                height: g.frame(in: .global).minY - top.offset <= 0 ? g.size.height : g.size.height + g.frame(in: .global).minY,
                 alignment: .center)
         }
     }
