@@ -21,34 +21,19 @@ struct StickyView<Content>: View where Content: View {
     
     var body: some View {
         GeometryReader { g in
-            if g.frame(in: .global).minY - top.offset <= 0 {
-                VStack {
-                    Spacer()
-                        .frame(
-                            width: g.size.width,
-                            height: top.offset)
-                    
-                    self.content()
-                }
-                .frame(
-                    width: g.size.width,
-                    height: g.size.height,
-                    alignment: .center)
-            } else {
-                VStack {
-                    Spacer()
-                        .frame(
-                            width: g.size.width,
-                            height: top.offset)
-                    
-                    self.content()
-                }
-                .offset(y: -g.frame(in: .global).minY + top.offset)
-                .frame(
-                    width: g.size.width,
-                    height: g.size.height + g.frame(in: .global).minY - top.offset,
-                    alignment: .center)
+            VStack {
+                Spacer()
+                    .frame(
+                        width: g.size.width,
+                        height: top.offset)
+                
+                self.content()
             }
+            .offset(y: g.frame(in: .global).minY - top.offset <= 0 ? 0 : -g.frame(in: .global).minY + top.offset)
+            .frame(
+                width: g.size.width,
+                height: g.size.height,
+                alignment: .center)
         }
     }
 }
